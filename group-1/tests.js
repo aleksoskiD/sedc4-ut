@@ -134,3 +134,17 @@ QUnit.test("testing valid object with invalid age (decimal) - success", function
     assert.equal(person.age, 38);
     assert.ok(result);
 });
+
+QUnit.test("testing empty object with valid age - success", function(assert){
+
+    //arrange
+    var person = {};
+    var age = 38;
+
+    //act
+    var result = setAge(person, age);
+
+    //assert
+    assert.notOk(person.age);
+    assert.notOk(result);
+});
