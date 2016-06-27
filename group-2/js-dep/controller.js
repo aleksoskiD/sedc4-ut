@@ -5,13 +5,12 @@ var personController = (function(){
     };
 
     var getPerson = function (id) {
-        if (typeof id !== "number")
-            return;
         var result = personService.getPersonById(id);
         if (result && result.success){
             data.currentPerson = result.data;
             data.errorState = false;
         } else {
+            data.currentPerson = null;
             data.errorState = true;
         }
     };
