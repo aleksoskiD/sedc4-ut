@@ -23,18 +23,19 @@ describe("demo tests", function(){
 describe("controller tests", function(){
     it("getPerson should handle success response", function(){
         //arrange
+        var personId = 1;
         spyOn(personService,"getPersonById").and.returnValue({
             success : true,
             data : "Weko was here" 
         });
 
         //act
-        personController.getPerson(1);
+        personController.getPerson(personId);
 
         //assert
         expect(personController.data.currentPerson).toBe("Weko was here");
         expect(personController.data.errorState).toBeFalsy();
-        expect(personService.getPersonById).toHaveBeenCalledWith(1);
+        expect(personService.getPersonById).toHaveBeenCalledWith(personId);
     });
 
     it("getPerson should handle failure response", function(){
