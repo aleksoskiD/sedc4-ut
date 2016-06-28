@@ -123,6 +123,61 @@ namespace EntitiesTests
             var weko = new Person(firstName, lastName, age);
         }
 
+        [TestMethod]
+        public void SaveToDatabase_UnderagePerson_False_Test()
+        {
+            //arrange
+            var firstName = "Wekoslav";
+            var lastName = "Stefanovski";
+            var age = 16;
+            var weko = new Person(firstName, lastName, age);
+            var database = new PersonDatabaseFake(true);
+            weko.Database = database;
+
+            //act
+            var result = weko.SaveToDatabase();
+
+            //assert
+            Assert.IsFalse(result);
+            Assert.IsFalse(database.WasCalled);
+        }
+
+        [TestMethod]
+        public void SaveToDatabase_OverAgePerson_SuccessSave_Test()
+        {
+            //arrange
+            var firstName = "Wekoslav";
+            var lastName = "Stefanovski";
+            var age = 38;
+            var weko = new Person(firstName, lastName, age);
+            weko.Database = new PersonDatabaseFake(true);
+
+            //act
+            var result = weko.SaveToDatabase();
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void SaveToDatabase_OverAgePerson_FailSave_Test()
+        {
+            //arrange
+            var firstName = "Wekoslav";
+            var lastName = "Stefanovski";
+            var age = 38;
+            var weko = new Person(firstName, lastName, age);
+            var database = new PersonDatabaseFake(false);
+            weko.Database = database;
+
+            //act
+            var result = weko.SaveToDatabase();
+
+            //assert
+            Assert.IsFalse(result);
+            Assert.IsTrue(database.WasCalled);
+        }
+
 
 
     }

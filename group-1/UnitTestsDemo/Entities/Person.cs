@@ -24,5 +24,16 @@ namespace Entities
         public int Age { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+
+        public IPersonDatabase Database { get; set; }
+
+        public bool SaveToDatabase()
+        {
+            if (Age < 18)
+                return false;
+
+            var result = Database.Save(FirstName, LastName, Age);
+            return result;
+        }
     }
 }

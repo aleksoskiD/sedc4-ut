@@ -12,7 +12,10 @@ namespace MainConsole
         static void Main(string[] args)
         {
             var weko = new Person("Wekoslav", "Stefanovski", 0x26);
+            Console.WriteLine($"{weko.FirstName} {weko.LastName} ({weko.Age})");
 
+            weko.Database = new PersonDatabase();
+            weko.SaveToDatabase();
         }
     }
 }
